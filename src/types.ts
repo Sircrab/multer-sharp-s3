@@ -38,6 +38,7 @@ export interface Format {
 
 export interface ExtendSize {
   suffix: string
+  prefix?: string
   Body?: NodeJS.ReadableStream & SharpInstance
 }
 
