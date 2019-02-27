@@ -107,29 +107,24 @@ class S3Storage {
                 let keyValue = '';
                 let prefix = '';
                 let suffix = '';
-                console.log(size);
                 if ('prefix' in size) {
                     prefix = size.prefix + size.delimiter;
                 }
                 if ('suffix' in size) {
                     suffix = size.delimiter + size.suffix;
                 }
-                console.log('prefix: ' + prefix);
-                console.log('suffix: ' + suffix);
-                console.log('rawKey: ' + params.Key);
                 let splitKey = params.Key.split('/');
                 if (splitKey.length > 1) {
                     let filename = splitKey[splitKey.length - 1];
                     filename = prefix + filename + suffix;
                     for (let i = 0; i < splitKey.length - 1; i++) {
-                        keyValue = splitKey[i] + '/';
+                        keyValue += splitKey[i] + '/';
                     }
                     keyValue += filename;
                 }
                 else {
                     keyValue = prefix + splitKey[0] + suffix;
                 }
-                console.log('keyValue: ' + keyValue);
                 let newParams = Object.assign({}, params, { Body,
                     ContentType, Key: `${keyValue}` });
                 const upload = opts.s3.upload(newParams);
