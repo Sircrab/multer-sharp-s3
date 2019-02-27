@@ -21,6 +21,8 @@ export interface Format {
 }
 export interface ExtendSize {
     suffix: string;
+    prefix?: string;
+    delimiter?: string;
     Body?: NodeJS.ReadableStream & SharpInstance;
 }
 export declare type SharpOption<T = string> = T;
