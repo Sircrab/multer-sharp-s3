@@ -1,5 +1,5 @@
 {
-  "name": "multer-sharp-s3",
+  "name": "multer-sharp-s3a",
   "version": "0.1.0",
   "description": "A plugin multer to transform image and upload to AWS S3",
   "main": "index.js",
@@ -58,7 +58,7 @@
     "@types/node": "^10.12.1",
     "@types/sharp": "0.17.10",
     "@types/supertest": "^2.0.6",
-    "aws-sdk": "^2.348.0",
+    "aws-sdk": "^2.411.0",
     "codecov": "^3.1.0",
     "express": "^4.16.4",
     "jest": "^23.6.0",
@@ -71,6 +71,7 @@
   },
   "dependencies": {
     "mime-types": "^2.1.21",
+    "multer-sharp-s3": "^0.1.0",
     "rxjs": "^6.3.3",
     "sharp": "0.20.8",
     "yarn.lock": "^0.0.1-security"

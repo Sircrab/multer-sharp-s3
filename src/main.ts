@@ -149,16 +149,30 @@ export class S3Storage implements StorageEngine {
                 size.delimiter = '-'
             }
             let keyValue = ''
-            if(!('prefix' in size)){
-                size.prefix = ''
+            let prefix = ''
+            let suffix = ''
+            if('prefix' in size){
+                prefix = size.prefix + size.delimiter
+            }
+            if('suffix' in size){
+                suffix = size.delimiter + size.suffix
+            }
+            let splitKey = params.Key.split('/')
+            if(splitKey.length > 1){
+                let filename = splitKey[splitKey.length - 1]
+                filename = prefix + filename + suffix
+                for(let i = 0; i < splitKey.length - 1; i++){
+                    keyValue = splitKey[i] + '/'
+                }
+                keyValue += filename
             } else {
-                size.prefix += size.delimiter
+                keyValue = prefix + splitKey[0] + suffix
             }
             let newParams = {
               ...params,
               Body,
               ContentType,
-              Key: `${size.prefix}${params.Key}${size.delimiter}${size.suffix}`,
+              Key: `${keyValue}`,
             }
             const upload = opts.s3.upload(newParams)
             let currentSize = { [size.suffix]: 0 }
